@@ -29,6 +29,7 @@ if %errorLevel% equ 1 (
 if %errorLevel% equ 2 (goto :start)
 
 :createLink
+cls
 mklink /j "%userProfile%\OneDrive\%folderLink%" "%~dp0"
 echo.
 echo Finish.
