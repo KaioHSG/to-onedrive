@@ -1,5 +1,15 @@
+:: Path to OneDrive
+@set oneDrivePath=%userProfile%\OneDrive
+
 @echo off
 title To OneDrive
+if not exist "%oneDrivePath%" (
+    echo %oneDrivePath%
+    echo.
+    echo Error: unable to find OneDrive directory. Edit this ".bat" file to the correct location.
+    echo.
+    pause > nul
+)
 whoami /groups | find "S-1-16-12288" > nul
 if %errorLevel% neq 0 (
    echo Accept Administrator Privileges to continue.
@@ -13,24 +23,24 @@ pushd "%~dp0"
 :start
 echo Saved folders:
 echo -------------------------------------------------
-dir /b /a:d "%userProfile%\OneDrive"
+dir /b /a:d "%oneDrivePath%"
 echo.
-set /p folderLink=New name for current folder: 
-if exist "%userProfile%\OneDrive\%folderLink%" (goto :conflict) else (goto :createLink)
+set /p folderJunction=New name for current folder: 
+if exist "%oneDrivePath%\%folderJunction%" (goto :conflict) else (goto :createLink)
 
 :conflict
 echo.
-choice /c yn /m "A directory with that name already exists, I would like to replace it"
+choice /c yn /m "A folder with that name already exists, I would like to replace it"
 cls
 if %errorLevel% equ 1 (
-   rmdir /q "%userProfile%\OneDrive\%folderLink%"
+   rmdir "%oneDrivePath%\%folderJunction%" /s /q
    goto :createLink
 )
 if %errorLevel% equ 2 (goto :start)
 
 :createLink
 cls
-mklink /j "%userProfile%\OneDrive\%folderLink%" "%~dp0"
+mklink /j "%oneDrivePath%\%folderJunction%" "%~dp0"
 echo.
 echo Finish.
 pause > nul
