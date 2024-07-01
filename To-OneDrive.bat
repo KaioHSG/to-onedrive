@@ -31,12 +31,11 @@ if exist "%oneDrivePath%\%folderJunction%" (goto :conflict) else (goto :createLi
 :conflict
 echo.
 choice /c yn /m "A folder with that name already exists, I would like to replace it"
-cls
 if %errorLevel% equ 1 (
    rmdir "%oneDrivePath%\%folderJunction%" /s /q
    goto :createLink
 )
-if %errorLevel% equ 2 (goto :start)
+if %errorLevel% equ 2 (cls && goto :start)
 
 :createLink
 cls
