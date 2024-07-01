@@ -26,8 +26,8 @@ echo -------------------------------------------------
 dir /b /a:d "%oneDrivePath%"
 echo.
 set /p folderJunction=Folder name: 
+echo.
 if not exist "%oneDrivePath%\%folderJunction%" (
-   echo.
    echo The specified folder does not exist.
    pause > nul
    cls
