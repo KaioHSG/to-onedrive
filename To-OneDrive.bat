@@ -7,8 +7,8 @@ if not exist "%oneDrivePath%" (
     echo %oneDrivePath%
     echo.
     echo Error: unable to find OneDrive directory. Edit this ".bat" file to the correct location.
-    echo.
     pause > nul
+    exit
 )
 whoami /groups | find "S-1-16-12288" > nul
 if %errorLevel% neq 0 (
