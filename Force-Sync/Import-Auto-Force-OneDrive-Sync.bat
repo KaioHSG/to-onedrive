@@ -1,5 +1,5 @@
 @echo off
-title Auto Force OneDrive Synk
+title Auto Force OneDrive Sync
 whoami /groups | find "S-1-16-12288" > nul
 if %errorLevel% neq 0 (
    echo Accept Administrator Privileges to continue.
@@ -9,7 +9,7 @@ if %errorLevel% neq 0 (
    exit
 )
 pushd "%~dp0"
-schtasks /create /tn "Auto Force OneDrive Synk" /xml "Auto-Force-OneDrive-Synk.xml" /f
+schtasks /create /tn "Auto Force OneDrive Sync" /xml "Auto-Force-OneDrive-Sync.xml" /f
 echo.
 echo Finish.
 pause > nul
